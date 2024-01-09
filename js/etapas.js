@@ -22,7 +22,7 @@ let etapas = [
         ]
     },
     {
-        titulo: 'Prefeito',
+        titulo: 'PREFEITO',
         numeros: 2,
         candidatos: [
             {
@@ -32,7 +32,7 @@ let etapas = [
                 vice: 'Cicero',
                 fotos: [
                     {url: '/images/bolso.png', legenda: 'Prefeito'},
-                    {url: '/images/trump.png', legenda: 'Vice-Prefeiro', small: true}
+                    {url: '/images/trump.png', legenda: 'Vice-Prefeito', small: true}
                 ]
             },
             {
@@ -42,7 +42,7 @@ let etapas = [
                 vice: 'Matheus',
                 fotos: [
                     {url: '/images/lula.png', legenda: 'Prefeito'},
-                    {url: '/images/zelen.png', legenda: 'Vice-Prefeiro', small: true}
+                    {url: '/images/zelen.png', legenda: 'Vice-Prefeito', small: true}
                 ] 
             }
         ]

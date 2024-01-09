@@ -103,7 +103,9 @@ body {
 }
 
 .d-1-3 {
-    height: 50px;
+    display: flex;
+    gap: 3px;
+    align-items: center;
 }
 
 .numero {
@@ -157,5 +159,28 @@ body {
 
 .aviso--grande {
     font-size: 20px;
+}
+
+.aviso--gigante {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+@media (max-width: 930px) {
+    .urna {
+        flex-direction: column;
+        height: 100vh;
+    }
+}
+
+@media (max-width: 700px) {
+    .tela {
+        width: 95vw;
+    }
 }
 

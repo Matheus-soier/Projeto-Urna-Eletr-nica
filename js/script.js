@@ -10,6 +10,8 @@ let numeros = qs('.d-1-3');
 
 let etapaAtual = 0;
 let numero = ``;
+let votoBranco = false;
+let votosTotais = [];
 
 qsa('.teclado--linha .teclado--botao').forEach(e => {
     e.addEventListener('click', e => {
@@ -32,16 +34,16 @@ function startEtapa() {
     let etapa = etapas[etapaAtual];
 
     let numeroHTML = ``;
+    numero = ``;
+    votoBranco = false;
 
     for(let i = 0; i<etapa.numeros; i++) {
-
         if(i == 0) {
             numeroHTML += `<div class="numero pisca"></div>`;
         } else {
         numeroHTML += `<div class="numero"></div>`;
         }
     }
-
     seuVotoPara.style.display = `none`;
     cargo.innerHTML = etapa.titulo;
     descricao.innerHTML = ``;
@@ -62,7 +64,11 @@ function atualizaInterface() {
         
         let fotosHTML = ``;
         for(let i in candidato.fotos) {
-            fotosHTML += `<div class="d-1-image"><img src="${candidato.fotos[i].url}">${candidato.fotos[i].legenda}</div>`
+            if (candidato.fotos[i].small) {
+                fotosHTML += `<div class="d-1-image small"><img src="${candidato.fotos[i].url}">${candidato.fotos[i].legenda}</div>`;
+            } else {
+                fotosHTML += `<div class="d-1-image"><img src="${candidato.fotos[i].url}">${candidato.fotos[i].legenda}</div>`;
+            }
         }
         lateral.innerHTML = fotosHTML;
     } else {
@@ -88,15 +94,48 @@ function numeroClick(e) {
 }
 
 function confirma() {
-   
+   let etapa = etapas[etapaAtual];
+    let votoConfirmado = false;
+
+   if(votoBranco === true) {
+    votoConfirmado = true;
+    votosTotais.push({
+        etapa: etapas[etapaAtual].titulo,
+        voto: 'branco'
+    });
+   } else if(numero.length === etapa.numeros) {
+    votoConfirmado = true;
+    votosTotais.push({
+        etapa: etapas[etapaAtual].titulo,
+        voto: numero
+    });
+   }
+
+    if(votoConfirmado) {
+        etapaAtual++;
+        if(etapas[etapaAtual] !== undefined) {
+           startEtapa(); 
+        } else {
+            qs('.tela').innerHTML = `<div class="aviso--gigante pisca">FIM</div>`;
+            console.log(votosTotais);
+        }
+    }
+
+
 }
 
 function branco() {
-   
+    numero = ``;    
+    votoBranco = true;
+    seuVotoPara.style.display = `block`;
+    aviso.style.display = `block`;
+    numeros.innerHTML = ``;
+    descricao.innerHTML = `<div class="aviso--grande pisca">VOTO EM BRANCO</div>`
+    lateral.innerHTML = ``;
 }
 
 function corrige() {
-    
+    startEtapa();
 }
 
 startEtapa();
